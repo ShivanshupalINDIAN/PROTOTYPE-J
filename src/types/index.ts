@@ -38,4 +38,10 @@ export interface User {
   location: string; // Added location property
 }
 
+export interface Short{
+  id: string;
+  text: string;
+  
+}
+
 // Other interfaces remain unchanged
