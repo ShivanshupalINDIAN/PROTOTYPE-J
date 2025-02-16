@@ -19,12 +19,12 @@ export function ShortsFilters() {
   };
 
   return (
-    <div className="mb-8">
-      <div className="flex items-center gap-2 mb-4">
+    <div className="" >
+      {/* <div className="flex items-center gap-2 mb-4">
         <Tag className="h-5 w-5" />
         
-      </div>
-      <div className="flex flex-wrap gap-2">
+      </div> */}
+      <div className="flex flex-wrap gap-2 mb-4">
         {SHORTS_TAGS.map((tag) => (
           <button
             key={tag}

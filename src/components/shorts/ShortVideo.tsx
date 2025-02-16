@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
-import { Heart, MessageCircle, Share2, Bookmark, MoreVertical } from  'lucide-react';
+import { Heart, MessageCircle, Share2, Bookmark, MoreVertical } from 'lucide-react';
 import type { Short } from '../../types';
+import { MOCK_SHORTS } from '../../data/mockShorts';
+
 
 interface ShortVideoProps {
   short: Short;
 }
-
 
 export function ShortVideo({ short }: ShortVideoProps) {
   const [isLiked, setIsLiked] = useState(false);
@@ -13,29 +14,36 @@ export function ShortVideo({ short }: ShortVideoProps) {
   const [likes, setLikes] = useState(short.likes); // Track likes count
 
   const lastTapRef = useRef<number | null>(null);
+ 
+
+
+  const handleLikeToggle = () => {
+    setIsLiked((prev) => {
+      const newIsLiked = prev;
+      setLikes((prevLikes) => (newIsLiked ? prevLikes + 1 : prevLikes - 1));
+      return newIsLiked;
+    });
+  };
 
   const handleDoubleTap = (event: React.MouseEvent | React.TouchEvent) => {
     event.preventDefault();
     const now = Date.now();
 
     if (lastTapRef.current && now - lastTapRef.current < 300) {
-      // Toggle like state on double tap
-      setIsLiked((prev) => !prev);
-      setLikes((prev) => (isLiked ? prev - 1 : prev + 1));
+      handleLikeToggle();
     }
 
     lastTapRef.current = now;
   };
 
   return (
-    <div className="relative aspect-[9/16] w-full max-w-[400px] mx-auto bg-gray-900 rounded-lg overflow-hidden"
-    onTouchStart={handleDoubleTap}
-        onClick={handleDoubleTap}>
+    <div
+      className="relative aspect-[5/8] w-full max-w-[400px] mx-auto bg-gray-900 rounded-lg overflow-hidden"
+      onTouchStart={handleDoubleTap}
+      onClick={handleDoubleTap}
+    >
       {/* Video Container */}
-      <div
-        className="absolute inset-0"
-         // Desktop support
-      >
+      <div className="absolute inset-0">
         {short.videoUrls.map((videoUrl, index) => (
           <video
             key={index}
@@ -53,14 +61,7 @@ export function ShortVideo({ short }: ShortVideoProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60">
         {/* Right Side Actions */}
         <div className="absolute right-4 bottom-20 flex flex-col items-center space-y-6">
-          <button
-            onClick={() => {
-              setIsLiked(!isLiked);
-              setLikes((prev) => (isLiked ? prev - 1 : prev + 1));
-            }}
-            className="flex flex-col items-center"
-            aria-label="Like Video"
-          >
+          <button onClick={handleLikeToggle} className="flex flex-col items-center" aria-label="Like Video">
             <Heart className={`w-7 h-7 ${isLiked ? 'text-red-500 fill-red-500' : 'text-white'}`} />
             <span className="text-xs mt-1 text-white">{likes.toLocaleString()}</span>
           </button>
@@ -98,9 +99,6 @@ export function ShortVideo({ short }: ShortVideoProps) {
               className="w-10 h-10 rounded-full border-2 border-white"
             />
             <span className="font-semibold">{short.user.username}</span>
-            <button className="ml-2 px-4 py-1 border border-white rounded-full text-sm hover:bg-white hover:text-black transition-colors">
-              Follow
-            </button>
           </div>
           <p className="text-sm line-clamp-2">{short.description}</p>
         </div>
