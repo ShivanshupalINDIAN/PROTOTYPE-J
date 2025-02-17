@@ -120,7 +120,7 @@ export function ShortsPage() {
       />
       <button
         onClick={handlePrevShort}
-        className="absolute top-60 right-40 bg-black/50 p-3 rounded-full"
+        className="absolute top-60 right-40 bg-black/50 p-3 rounded-full hover:bg-black/80"
         aria-label="Previous Video"
       >
         <ChevronUp className="w-7 h-7 text-white" />
@@ -133,7 +133,7 @@ export function ShortsPage() {
       
       <button
         onClick={handleNextShort}
-        className="absolute bottom-44 right-40 bg-black/50 p-3 rounded-full"
+        className="absolute bottom-40 right-40 bg-black/50 p-3 rounded-full hover:bg-black/80"
         aria-label="Next Video"
       >
         <ChevronDown className="w-7 h-7 text-white" />
