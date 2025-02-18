@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ShortVideo } from './ShortVideo';
 import type { Short } from '../../types';
 

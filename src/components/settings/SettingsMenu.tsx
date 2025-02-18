@@ -1,10 +1,10 @@
-import React from 'react';
-import { User, Bell, Shield, HelpCircle, LogOut } from 'lucide-react';
+
+import { User,Shield, HelpCircle, LogOut } from 'lucide-react';
 
 
 const menuItems = [
   { icon: User, label: 'Account Settings' },
-  { icon: Bell, label: 'Notifications' },
+  
   { icon: Shield, label: 'Privacy & Security' },
   { icon: HelpCircle, label: 'Help & Support' },
   { icon: LogOut, label: 'Sign Out' }
