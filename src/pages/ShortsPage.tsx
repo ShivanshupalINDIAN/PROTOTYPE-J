@@ -22,8 +22,8 @@ const MOCK_SHORTS: Short[] = [
     videoUrl: '/assets/s1.mp4',
     videoUrls: ['/assets/s1.mp4'],
     description: 'Quick update from today\'s community meeting #LocalGov',
-    likes: 25+'K',
-    comments: 100+'K',
+    likes: 25000,
+    comments: 10000,
     views: 25000,
     timestamp: Date.now(),
     tags: ['Governance', 'Local News']

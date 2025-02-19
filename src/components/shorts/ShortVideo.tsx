@@ -1,8 +1,6 @@
 import { useState, useRef } from 'react';
 import { Heart, MessageCircle, Share2, Bookmark, MoreVertical } from 'lucide-react';
 import type { Short } from '../../types';
-import { MOCK_SHORTS } from '../../data/mockShorts';
-
 
 interface ShortVideoProps {
   short: Short;
@@ -11,18 +9,26 @@ interface ShortVideoProps {
 export function ShortVideo({ short }: ShortVideoProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  const [likes, setLikes] = useState(short.likes); // Track likes count
+  const [likes, setLikes] = useState(short.likes);
 
   const lastTapRef = useRef<number | null>(null);
- 
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const handleLike = () => {
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
+    }
 
-  const handleLikeToggle = () => {
-    setIsLiked((prev) => {
-      const newIsLiked = prev;
-      setLikes((prevLikes) => (newIsLiked ? prevLikes + 1 : prevLikes - 1));
-      return newIsLiked;
-    });
+    debounceTimeoutRef.current = setTimeout(() => {
+      setIsLiked((prevIsLiked) => {
+        if (prevIsLiked) {
+          setLikes((prevLikes) => prevLikes - 1);
+        } else {
+          setLikes((prevLikes) => (prevLikes || 0) + 1);
+        }
+        return !prevIsLiked;
+      });
+    }, 300); // Debounce delay of 300ms
   };
 
   const handleDoubleTap = (event: React.MouseEvent | React.TouchEvent) => {
@@ -30,7 +36,7 @@ export function ShortVideo({ short }: ShortVideoProps) {
     const now = Date.now();
 
     if (lastTapRef.current && now - lastTapRef.current < 300) {
-      handleLikeToggle();
+      handleLike();
     }
 
     lastTapRef.current = now;
@@ -61,7 +67,7 @@ export function ShortVideo({ short }: ShortVideoProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60">
         {/* Right Side Actions */}
         <div className="absolute right-4 bottom-20 flex flex-col items-center space-y-6">
-          <button onClick={handleLikeToggle} className="flex flex-col items-center" aria-label="Like Video">
+          <button onClick={handleLike} className="flex flex-col items-center" aria-label="Like Video">
             <Heart className={`w-7 h-7 ${isLiked ? 'text-red-500 fill-red-500' : 'text-white'}`} />
             <span className="text-xs mt-1 text-white">{likes.toLocaleString()}</span>
           </button>
