@@ -19,7 +19,7 @@ export function CreateProtestForm() {
 
   return (
     <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow">
-      <h2 className="text-xl font-bold mb-4">Organize a Protest</h2>
+      <h2 className="text-xl font-bold mb-4">Organize Voice</h2>
       <button
         type="button"
         className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mb-4"
@@ -97,7 +97,7 @@ export function CreateProtestForm() {
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
         >
-          Create Protest
+          Raise Voice
         </button>
       </form>
     </div>

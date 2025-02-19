@@ -23,7 +23,7 @@ export function OrganizeProtestModal({ isOpen, onClose }: { isOpen: boolean; onC
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl font-bold mb-4">Organize a Protest</h2>
+        <h2 className="text-xl font-bold mb-4">Organize a Voice</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-2">Title</label>
@@ -86,7 +86,7 @@ export function OrganizeProtestModal({ isOpen, onClose }: { isOpen: boolean; onC
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
           >
-            Create Protest
+            Organise Voice
           </button>
         </form>
         <button onClick={onClose} className="mt-4 text-blue-500">Close</button>
