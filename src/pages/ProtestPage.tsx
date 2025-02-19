@@ -71,7 +71,7 @@ export function ProtestPage() {
           <h1 className="text-2xl font-bold text-black">Raise Your Voice</h1>
           <p className="text-black">Join and support digital rights movements</p>
         </div>
-        <button className="bg-white text-black px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+        <button className="bg-gray-300 border-6 border-black text-black px-6 py-2 rounded-lg hover:bg-gray-400 transition-colors"
         >
           Organize Voices
         </button>
@@ -99,18 +99,18 @@ export function ProtestPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="text-left border-b border-gray-800">
+              <tr className="text-left border-b  border-gray-800">
                 <th className="pb-3 px-4 text-white">Name</th>
                 <th className="pb-3 px-4 text-white">Full Name</th>
                 <th className="pb-3 px-4 text-white">Associated With</th>
-                <th className="pb-3 px-4">Action</th>
+                <th className="pb-3 px-4  text-white">Action</th>
               </tr>
             </thead>
             <tbody>
               {filteredOrgs.map((org) => (
                 <tr 
                   key={org.id}
-                  className={`border-b border-gray-800 hover:bg-gray-800/50 transition-colors ${
+                  className={`border-b  border-gray-800 hover:bg-gray-800/50 transition-colors ${
                     joinedOrgs.includes(org.id) ? 'bg-gray-700' : ''
                   }`}
                 >
@@ -122,11 +122,11 @@ export function ProtestPage() {
                       onClick={() => handleJoinToggle(org.id)}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
                         joinedOrgs.includes(org.id) 
-                          ? 'bg-green-500 text-white font-bold' 
+                          ? 'bg-yellow-500 text-white font-bold' 
                           : 'bg-blue-500 hover:bg-blue-600 text-white'
                       }`}
                     >
-                      <ExternalLink className="h-4 w-4" />
+                      {/* <ExternalLink className="h-4 w-4" /> */}
                       {joinedOrgs.includes(org.id) ? 'Joined' : 'Join Now'}
                     </button>
                   </td>
@@ -156,7 +156,7 @@ export function ProtestPage() {
                   : 'bg-blue-500 hover:bg-blue-600 text-white'
               }`}
             >
-              {joinedProtests.includes(protest.id) ? 'Joined' : 'Join Protest'}
+              {joinedProtests.includes(protest.id) ? 'Joined' : 'Join Voice'}
             </button>
           </div>
         ))}

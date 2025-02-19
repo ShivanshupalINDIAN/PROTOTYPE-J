@@ -46,8 +46,8 @@ export function ProtestCard({ protest }: ProtestProps) {
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
           <div>
-            <h2 className="text-xl font-bold mb-2">{protest.title}</h2>
-            <p className="text-gray-400">{protest.description}</p>
+            <h2 className="text-xl  text-white font-bold mb-2">{protest.title}</h2>
+            <p className="text-white">{protest.description}</p>
           </div>
           <span className={`px-3 py-1 rounded-full text-sm ${
             protest.status === 'active' ? 'bg-green-500' :
@@ -68,15 +68,15 @@ export function ProtestCard({ protest }: ProtestProps) {
             <MapPin className="h-5 w-5" />
             <span>{protest.location}</span>
           </div>
-          <div className="flex items-center gap-2 text-gray-400">
+          {/* <div className="flex items-center gap-2 text-gray-400">
             <Users className="h-5 w-5" />
             <span>{protest.participants} Reposted</span>
-          </div>
-        </div>
+          </div>*/}
+        </div> 
 
         {/* Action Buttons */}
         <div className="flex gap-4 mb-6">
-          <button
+          {/* <button
             onClick={() => setHasJoined(!hasJoined)}
             className={`flex-1 py-2 rounded-lg font-medium transition-colors ${
               hasJoined
@@ -85,7 +85,7 @@ export function ProtestCard({ protest }: ProtestProps) {
             }`}
           >
             {hasJoined ? 'Reposted' : 'Repost'}
-          </button>
+          </button> */}
           <button
             onClick={() => setIsSubscribed(!isSubscribed)}
             className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"

@@ -31,7 +31,7 @@ export function OrganizeProtestModal({ isOpen, onClose }: { isOpen: boolean; onC
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-4 py-2 rounded-lg border"
+              className="w-full px-4 py-2  text-white rounded-lg border"
               required
             />
           </div>

@@ -24,7 +24,7 @@ export function CreateProtestForm() {
         type="button"
         className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 mb-4"
       >
-        Create Protest
+        Create Voice
       </button>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

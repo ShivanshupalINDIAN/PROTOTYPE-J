@@ -13,7 +13,7 @@ export function Header() {
       <div className="max-w-7xl ml-0 mr-auto px-0 h-24">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center mx-10">
-            <div className="h-16 w-16 border-white  bg-white border-2  mr-2">
+            <div className="h-16 w-16 border-white rounded-md bg-white border-2  mr-2">
               <img src={jatayuLogo} alt="Jatayu Logo" className="h-full w-full object-cover" />
             </div>
             <span className={`text-3xl font-bold text-white  ml-2 mr-5 pl-0`}>
