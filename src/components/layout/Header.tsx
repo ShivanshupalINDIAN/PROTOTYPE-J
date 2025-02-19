@@ -3,16 +3,20 @@ import { Search, Bell, Menu, Settings } from 'lucide-react';
 import { ThemeToggle } from '../theme/ThemeToggle';
 import { SettingsMenu } from '../settings/SettingsMenu';
 import { colors, componentStyles } from '../../styles/theme';
+import jatayuLogo from '../../assets/jatayu_logo.png';
 
 export function Header() {
   const [showSettings, setShowSettings] = useState(false);
 
   return (
     <header className={`fixed top-0 left-0 right-0 bg-black border-b ${colors.primary.border} shadow-sm z-50`}>
-      <div className="max-w-7xl mx-auto px-4 h-24">
+      <div className="max-w-7xl ml-0 mr-auto px-0 h-24">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center mx-10">
-            <span className={`text-2xl font-bold text-white mr-5`}>
+            <div className="h-16 w-16 border-white  bg-white border-2  mr-2">
+              <img src={jatayuLogo} alt="Jatayu Logo" className="h-full w-full object-cover" />
+            </div>
+            <span className={`text-3xl font-bold text-white  ml-2 mr-5 pl-0`}>
               <h1>JATAYU</h1>
             </span>
           </div>
@@ -24,7 +28,7 @@ export function Header() {
               <input
                 type="search"
                 placeholder="Search"
-                className={componentStyles.input}
+                className={`${componentStyles.input} pl-9`}
               />
             </div>
           </div>
