@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Search, Users, ExternalLink } from 'lucide-react';
 import { ProtestCard } from '../components/protest/ProtestCard';
 
+import { Dialog } from "@headlessui/react";
+import { Switch } from "@headlessui/react";
+
+
 const YOUTH_ORGANIZATIONS = [
   { id: 'abvp', name: 'ABVP', fullName: 'Akhil Bharatiya Vidyarthi Parishad', association: 'Rashtriya Swayamsevak Sangh' },
   { id: 'ackhsa', name: 'ACKHSA', fullName: 'All Cachar Karimganj Hailakandi Students Association', association: 'Barak Democratic Front' },
@@ -47,6 +51,22 @@ export function ProtestPage() {
   const [joinedOrgs, setJoinedOrgs] = useState<string[]>([]);
   const [joinedProtests, setJoinedProtests] = useState<string[]>([]);
 
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState(1);
+  const [isNotified, setIsNotified] = useState(false);
+  const [pollOptions, setPollOptions] = useState([""]);
+
+  const addPollOption = () => {
+    setPollOptions([...pollOptions, ""]);
+  };
+
+  const updatePollOption = (index, value) => {
+    const newOptions = [...pollOptions];
+    newOptions[index] = value;
+    setPollOptions(newOptions);
+  };
+
   const handleJoinToggle = (orgId: string) => {
     setJoinedOrgs((prev) =>
       prev.includes(orgId) ? prev.filter((id) => id !== orgId) : [...prev, orgId]
@@ -71,11 +91,141 @@ export function ProtestPage() {
           <h1 className="text-2xl font-bold text-black">Raise Your Voice</h1>
           <p className="text-black">Join and support digital rights movements</p>
         </div>
-        <button className="bg-gray-300 border-6 border-black text-black px-6 py-2 rounded-lg hover:bg-gray-400 transition-colors"
-        >
+        <button  type="button"   className="bg-gray-300  border-2 border-gray-600 text-black px-6 py-2 rounded-lg hover:bg-gray-400 transition-colors"
+        onClick={() => setIsOpen(true)} >
           Organize Voices
         </button>
       </div>
+
+
+
+
+
+
+
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 flex items-center justify-center p-4">
+        <Dialog.Panel className="bg-gray-300 text-black max-w-xl w-full p-8 rounded-3xl border border-black shadow-lg relative">
+          <h2 className="text-center text-3xl font-extrabold mb-6">Raise Voice</h2>
+          
+          {/* Step Indicator */}
+          <div className="flex items-center justify-center mb-6">
+            {[1, 2, 3].map((num, index) => (
+              <div key={num} className="flex items-center">
+                <div className={`w-10 h-10 flex items-center justify-center rounded-full border-2 font-extrabold ${step >= num ? 'bg-black text-white' : 'text-black'}`}>
+                  {num}
+                </div>
+                {index !== 2 && <div className="w-20 h-1 bg-black"></div>}
+              </div>
+            ))}
+          </div>
+
+          {/* Step 1 Fields */}
+          {step === 1 && (
+            <div>
+              <label className="block text-lg font-extrabold mb-2">1) Upload Cover</label>
+              <div className="border border-black p-20 rounded-2xl mb-4 text-center cursor-pointer bg-gray-100 text-black">
+                Drop file here or <span className="underline font-bold">Upload</span>
+              </div>
+              
+              <label className="block text-lg font-extrabold mb-2">2) General Information</label>
+              <input type="text" placeholder="Title" className="w-full p-3 mb-2 bg-white border border-black rounded-xl font-bold" />
+              <textarea placeholder="Description" className="w-full p-3 bg-white border border-black rounded-xl font-bold"></textarea>
+              
+              <label className="block text-lg font-extrabold mb-2">3) Target Audience</label>
+              <select className="w-full p-3 bg-white border border-black rounded-xl mb-4 font-bold">
+                <option>Students</option>
+                <option>All Users</option>
+                <option>Workers</option>
+              </select>
+              
+              <div className="flex justify-between">
+                <button onClick={() => setIsOpen(false)} className="border border-black px-6 py-2 rounded-xl hover:bg-black hover:text-white font-extrabold">
+                  Cancel
+                </button>
+                <button onClick={() => setStep(2)} className="border border-black px-6 py-2 rounded-xl hover:bg-black hover:text-white font-extrabold">
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 2 Fields */}
+          {step === 2 && (
+            <div>
+              <label className="block text-lg font-extrabold mb-2">4) Anonymous or Show Identity</label>
+              <div className="mb-4 flex space-x-4">
+                <label className="flex items-center font-extrabold"><input type="radio" name="identity" className="mr-2" /> Anonymous</label>
+                <label className="flex items-center font-extrabold"><input type="radio" name="identity" className="mr-2" /> Show Identity</label>
+              </div>
+              
+              <label className="block text-lg font-extrabold mb-2">5) User Notification Events</label>
+              <Switch
+                checked={isNotified}
+                onChange={setIsNotified}
+                className={`${isNotified ? 'bg-black' : 'bg-gray-500'} relative inline-flex h-8 w-14 items-center rounded-full`}
+              >
+                <span className="sr-only">Enable notifications</span>
+                <span className={`${isNotified ? 'translate-x-6 bg-white' : 'translate-x-1 bg-black'} inline-block h-6 w-6 transform rounded-full transition`} />
+              </Switch>
+              
+              <label className="block text-lg font-extrabold mt-4">6) Upload Documentation or Proof</label>
+              <div className="border border-black p-12 rounded-2xl text-center cursor-pointer mb-4 bg-gray-100 text-black w-full">
+                Drop files here (Supported formats: .jpg, .png, .pdf)
+              </div>
+              
+              <div className="flex justify-between">
+                <button onClick={() => setStep(1)} className="border border-black px-6 py-2 rounded-xl hover:bg-black hover:text-white font-extrabold">
+                  Back
+                </button>
+                <button onClick={() => setStep(3)} className="border border-black px-6 py-2 rounded-xl hover:bg-black hover:text-white font-extrabold">
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3 Fields */}
+          {step === 3 && (
+            <div>
+              <label className="block text-lg font-extrabold mb-2">7) Post</label>
+              <div className="border border-black p-20 rounded-2xl mb-4 text-center bg-gray-100 text-black">
+                Live Video or Post Preview
+              </div>
+              
+              <label className="block text-lg font-extrabold mb-2">8) Event Scheduling</label>
+              <input type="date" className="w-full p-3 bg-white border border-black rounded-xl mb-4 font-bold" />
+              
+              <label className="block text-lg font-extrabold mb-2">9) Poll</label>
+              {pollOptions.map((option, index) => (
+                <input 
+                  key={index} 
+                  type="text" 
+                  value={option} 
+                  onChange={(e) => updatePollOption(index, e.target.value)}
+                  placeholder={`Option ${index + 1}`} 
+                  className="w-full p-3 bg-white border border-black rounded-xl font-bold mb-2" 
+                />
+              ))}
+              <button onClick={addPollOption} className="text-blue-600 underline font-bold">+ Add Option</button>
+              
+              <div className="flex justify-between mt-4">
+                <button onClick={() => setStep(2)} className="border border-black px-6 py-2 rounded-xl hover:bg-black hover:text-white font-extrabold">
+                  Back
+                </button>
+                <button className="border border-black px-6 py-2 rounded-xl hover:bg-black hover:text-white font-extrabold">
+                  Submit
+                </button>
+              </div>
+            </div>
+          )}
+        </Dialog.Panel>
+      </Dialog>
+
+
+
+
+
+
 
       {/* Youth Organizations Section */}
       <div className="bg-gray-900 rounded-lg p-6 mb-8">
