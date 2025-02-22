@@ -240,17 +240,17 @@ export function ProtestPage() {
       <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 flex items-center justify-center p-4">
         <div className="fixed inset-0 bg-black opacity-80"></div>
   <Dialog.Panel className="bg-gray-100 text-black max-w-md w-full p-6 border border-gray-300 shadow-lg relative">
-    <h2 className="text-center text-2xl font-bold mb-6">Raise Voice</h2>
+    <h2 className="text-center text-2xl font-bold mb-6">Organize Voice</h2>
     
     {/* Step Indicator (Removed Numbers) */}
     <div className="flex items-center justify-center mb-6">
       {[1, 2, 3].map((num, index) => (
-        <div key={num} className="flex items-center mx-2">
-          <div className={`w-8 h-8 flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white' : 'text-black border-gray-400'}`}>
-            {num}
-          </div>
-          {index !== 2 && <div className="w-16 h-0.5 bg-black"></div>}
+      <div key={num} className="flex items-center mx-2">
+        <div className={`flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white' : 'text-black border-gray-400'} ${step === num ? 'w-12 h-12' : 'w-7 h-7'}`}>
+        {num}
         </div>
+        {index !== 2 && <div className="w-16 h-0.5 bg-black"></div>}
+      </div>
       ))}
     </div>
 
@@ -273,7 +273,7 @@ export function ProtestPage() {
           className="w-full p-3 bg-white border border-black rounded-4xl font-medium focus:outline-none focus:ring-2 focus:ring-black"
         />
         <label className="block text-lg font-semibold mb-2">Target Audience</label>
-        <select className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <select className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-black">
           <option>Students</option>
           <option>All Users</option>
           <option>Workers</option>
@@ -352,7 +352,7 @@ export function ProtestPage() {
         <label className="block text-lg font-semibold mb-2">Event Scheduling</label>
         <input
           type="date"
-          className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-black"
         />
         
         <label className="block text-lg font-semibold mb-2">Poll</label>
@@ -363,7 +363,7 @@ export function ProtestPage() {
             value={option}
             onChange={(e) => updatePollOption(index, e.target.value)}
             placeholder={`Option ${index + 1}`}
-            className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium mb-2 focus:outline-none focus:ring-2 focus:ring-black"
           />
         ))}
         <button
