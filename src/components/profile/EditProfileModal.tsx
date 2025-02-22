@@ -1,80 +1,135 @@
-import React from 'react';
-import { X, Camera, MapPin } from 'lucide-react';
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
 
 interface EditProfileModalProps {
   onClose: () => void;
 }
 
 export function EditProfileModal({ onClose }: EditProfileModalProps) {
+  const [formData, setFormData] = useState({
+    name: '',
+    profilePhoto: '',
+    dateOfBirth: '',
+    gender: '',
+    state: '',
+    city: '',
+    country: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log(formData);
+    onClose();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-gray-800 rounded-lg w-full max-w-md p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold">Edit Profile</h2>
-          <button onClick={onClose} className="p-2 hover:bg-gray-700 rounded-full">
-            <X className="h-5 w-5" />
-          </button>
-        </div>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md relative">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          <X className="h-5 w-5" />
+        </button>
 
-        <form className="space-y-4">
-          <div className="flex justify-center">
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200"
-                alt="Profile"
-                className="w-24 h-24 rounded-full"
-              />
-              <button className="absolute bottom-0 right-0 p-2 bg-blue-500 rounded-full hover:bg-blue-600">
-                <Camera className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
+        <h2 className="text-2xl font-bold mb-6">Edit Profile</h2>
 
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">Username</label>
+            <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
               type="text"
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              defaultValue="citizen.one"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Bio</label>
-            <textarea
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              rows={3}
-              defaultValue="Dedicated to making our community better | Digital Rights Activist"
+            <label className="block text-sm font-medium text-gray-700">Profile Photo URL</label>
+            <input
+              type="text"
+              name="profilePhoto"
+              value={formData.profilePhoto}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Location</label>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                className="w-full pl-10 pr-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                defaultValue="New Delhi, India"
-              />
-            </div>
+            <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+            <input
+              type="date"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+            />
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 text-gray-400 hover:text-white"
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Gender</label>
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
             >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg"
-            >
-              Save Changes
-            </button>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
           </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Country</label>
+            <input
+              type="text"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">State</label>
+            <input
+              type="text"
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">City</label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
+          >
+            Save Changes
+          </button>
         </form>
       </div>
     </div>
