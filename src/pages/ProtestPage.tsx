@@ -15,59 +15,50 @@ const YOUTH_ORGANIZATIONS = [
   { id: 'bapsa', name: 'BAPSA', fullName: 'Birsa Ambedkar Phule Students Association', association: 'United Dalit Students Forum' }
 ] as const;
 
-
 const MOCK_PROTESTS = [
   {
     id: '1',
     title: 'Digital Rights March',
-    description: 'Join us in our peaceful protest for digital privacy rights and data protection. Together we can make a difference!',
+    description: 'Join us in our peaceful protest for digital privacy rights and data protection.',
     location: 'New Delhi, India',
     date: '2024-04-15',
     participants: 1200,
-    status: 'upcoming' as const,
+    status: 'upcoming',
     videoUrl: '/mock-protest-1.mp4',
     likes: 2500,
-    comments: 342,
-    dailyUpdates: [
-      {
-        date: '2024-03-20',
-        content: 'Permit applications submitted. Planning committee formed.'
-      },
-      {
-        date: '2024-03-19',
-        content: 'Initial route planning completed. Starting volunteer registration.'
-      }
-    ]
+    comments: 342
   },
   {
     id: '2',
     title: 'Clean Governance Rally',
-    description: 'Standing together for transparency in digital governance. This protest aims to highlight the importance of accountability.',
+    description: 'Standing together for transparency in digital governance.',
     location: 'Mumbai, India',
     date: '2024-04-20',
     participants: 800,
-    status: 'active' as const,
+    status: 'active',
     videoUrl: '/mock-protest-2.mp4',
     likes: 1800,
-    comments: 256,
-    dailyUpdates: [
-      {
-        date: '2024-03-20',
-        content: 'Second planning meeting completed. Route confirmed.'
-      },
-      {
-        date: '2024-03-19',
-        content: 'First batch of volunteers onboarded.'
-      }
-    ]
+    comments: 256
   }
 ];
 
 export function ProtestPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [joinedOrgs, setJoinedOrgs] = useState<string[]>([]);
+  const [joinedProtests, setJoinedProtests] = useState<string[]>([]);
 
-  const [selectedOrg, setSelectedOrg] = useState<string | null>(null);
-  
+  const handleJoinToggle = (orgId: string) => {
+    setJoinedOrgs((prev) =>
+      prev.includes(orgId) ? prev.filter((id) => id !== orgId) : [...prev, orgId]
+    );
+  };
+
+  const handleProtestJoinToggle = (protestId: string) => {
+    setJoinedProtests((prev) =>
+      prev.includes(protestId) ? prev.filter((id) => id !== protestId) : [...prev, protestId]
+    );
+  };
+
   const filteredOrgs = YOUTH_ORGANIZATIONS.filter(org => 
     org.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     org.fullName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -79,29 +70,28 @@ export function ProtestPage() {
         <div>
           <h1 className="text-2xl font-bold text-black">Raise Your Voice</h1>
           <p className="text-black">Join and support digital rights movements</p>
-
         </div>
-        <button className="bg-white text-black px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-          Organize Protest
+        <button className="bg-white text-black px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+        >
+          Organize Voices
         </button>
       </div>
 
       {/* Youth Organizations Section */}
       <div className="bg-gray-900 rounded-lg p-6 mb-8">
         <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold flex items-center gap-2 text-white">
-
+          <h2 className="text-xl font-semibold flex items-center gap-2 text-white">
             <Users className="h-5 w-5" />
             Youth Activist Groups
           </h2>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w- text-gray-600" />
             <input
               type="search"
               placeholder="Search organizations..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-gray-900 placeholder-gray-600   focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -120,20 +110,24 @@ export function ProtestPage() {
               {filteredOrgs.map((org) => (
                 <tr 
                   key={org.id}
-                  className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors"
+                  className={`border-b border-gray-800 hover:bg-gray-800/50 transition-colors ${
+                    joinedOrgs.includes(org.id) ? 'bg-gray-700' : ''
+                  }`}
                 >
                   <td className="py-4 px-4 font-medium text-white">{org.name}</td>
                   <td className="py-4 px-4 text-white">{org.fullName}</td>
                   <td className="py-4 px-4 text-white">{org.association}</td>
                   <td className="py-4 px-4">
                     <button
-                      onClick={() => {
-                        setSelectedOrg(org.id);
-                      }}
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm transition-colors"
+                      onClick={() => handleJoinToggle(org.id)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
+                        joinedOrgs.includes(org.id) 
+                          ? 'bg-green-500 text-white font-bold' 
+                          : 'bg-blue-500 hover:bg-blue-600 text-white'
+                      }`}
                     >
                       <ExternalLink className="h-4 w-4" />
-                      Join Now
+                      {joinedOrgs.includes(org.id) ? 'Joined' : 'Join Now'}
                     </button>
                   </td>
                 </tr>
@@ -144,16 +138,27 @@ export function ProtestPage() {
       </div>
 
       {/* Active Protests Section */}
-      {selectedOrg && (
-        <div className="bg-gray-800 rounded-lg p-6 mb-8">
-          <h2 className="text-xl font-semibold text-white">Selected Organization</h2>
-          <p className="text-gray-400">You have selected: {YOUTH_ORGANIZATIONS.find(org => org.id === selectedOrg)?.fullName}</p>
-        </div>
-      )}
       <div className="space-y-6">
-        <h2 className="text-xl font-semibold">Active Protests</h2>
+        <h2 className="text-xl font-semibold">Active Voices</h2>
         {MOCK_PROTESTS.map((protest) => (
-          <ProtestCard key={protest.id} protest={protest} />
+          <div
+            key={protest.id}
+            className={`p-4 rounded-lg transition-all ${
+              joinedProtests.includes(protest.id) ? 'bg-gray-700 opacity-75' : 'bg-white'
+            }`}
+          >
+            <ProtestCard protest={protest} />
+            <button
+              onClick={() => handleProtestJoinToggle(protest.id)}
+              className={`mt-3 flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
+                joinedProtests.includes(protest.id) 
+                  ? 'bg-green-500 text-white font-bold' 
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+            >
+              {joinedProtests.includes(protest.id) ? 'Joined' : 'Join Protest'}
+            </button>
+          </div>
         ))}
       </div>
     </div>
