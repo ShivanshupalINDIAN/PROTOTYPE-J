@@ -238,17 +238,18 @@ export function ProtestPage() {
 
       {/* Dialog for Organize Voices */}
       <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 flex items-center justify-center p-4">
-  <Dialog.Panel className="bg-gray-100 text-black max-w-md w-full p-6 rounded-2xl border border-gray-300 shadow-lg relative">
+        <div className="fixed inset-0 bg-black opacity-80"></div>
+  <Dialog.Panel className="bg-gray-100 text-black max-w-md w-full p-6 border border-gray-300 shadow-lg relative">
     <h2 className="text-center text-2xl font-bold mb-6">Raise Voice</h2>
     
     {/* Step Indicator (Removed Numbers) */}
     <div className="flex items-center justify-center mb-6">
       {[1, 2, 3].map((num, index) => (
-        <div key={num} className="flex items-center">
+        <div key={num} className="flex items-center mx-2">
           <div className={`w-8 h-8 flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white' : 'text-black border-gray-400'}`}>
             {num}
           </div>
-          {index !== 2 && <div className="w-16 h-1 bg-gray-400"></div>}
+          {index !== 2 && <div className="w-16 h-0.5 bg-black"></div>}
         </div>
       ))}
     </div>
@@ -257,7 +258,7 @@ export function ProtestPage() {
     {step === 1 && (
       <div>
         <label className="block text-lg font-semibold mb-2">Upload Cover</label>
-        <div className="border-2 border-dashed border-gray-400 p-12 rounded-xl mb-4 text-center cursor-pointer bg-white text-gray-600 hover:bg-gray-50 transition-colors">
+        <div className="border-2 border-dashed border-gray-400 p-12 mb-4 text-center cursor-pointer bg-white text-gray-600 hover:bg-gray-50 transition-colors">
           Drop file here or <span className="underline font-bold">Upload</span>
         </div>
         
@@ -265,13 +266,12 @@ export function ProtestPage() {
         <input
           type="text"
           placeholder="Title"
-          className="w-full p-3 mb-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 px-10 mb-3 bg-white border border-black rounded-3xl font-medium focus:outline-none focus:ring-2 focus:ring-black"
         />
         <textarea
           placeholder="Description"
-          className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 bg-white border border-black rounded-4xl font-medium focus:outline-none focus:ring-2 focus:ring-black"
         />
-        
         <label className="block text-lg font-semibold mb-2">Target Audience</label>
         <select className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option>Students</option>
@@ -280,18 +280,18 @@ export function ProtestPage() {
         </select>
         
         <div className="flex justify-between mt-6">
-          <button
+            <button
             onClick={() => setIsOpen(false)}
-            className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-200 font-semibold transition-colors"
-          >
+            className="border border-black px-6 py-2 rounded-lg hover:bg-black hover:text-white font-semibold transition-colors"
+            >
             Cancel
-          </button>
-          <button
+            </button>
+            <button
             onClick={() => setStep(2)}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-semibold transition-colors"
-          >
+            className="bg-white text-black border border-black px-6 py-2 rounded-lg hover:bg-black hover:text-white font-semibold transition-colors"
+            >
             Next
-          </button>
+            </button>
         </div>
       </div>
     )}
@@ -325,18 +325,18 @@ export function ProtestPage() {
         </div>
         
         <div className="flex justify-between mt-6">
-          <button
+            <button
             onClick={() => setStep(1)}
-            className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-200 font-semibold transition-colors"
-          >
+            className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-black hover:text-white font-semibold transition-colors"
+            >
             Back
-          </button>
-          <button
+            </button>
+            <button
             onClick={() => setStep(3)}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-semibold transition-colors"
-          >
+            className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 font-semibold transition-colors"
+            >
             Next
-          </button>
+            </button>
         </div>
       </div>
     )}
@@ -368,20 +368,20 @@ export function ProtestPage() {
         ))}
         <button
           onClick={addPollOption}
-          className="text-blue-600 underline font-semibold hover:text-blue-700"
+          className="text-black underline font-semibold hover:text-black"
         >
           + Add Option
         </button>
         
         <div className="flex justify-between mt-6">
-          <button
+            <button
             onClick={() => setStep(2)}
-            className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-200 font-semibold transition-colors"
-          >
+            className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-black hover:text-white font-semibold transition-colors"
+            >
             Back
-          </button>
+            </button>
           <button
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-semibold transition-colors"
+            className="bg-black text-white px-6 py-2 rounded-lg hover:bg-black font-semibold transition-colors"
           >
             Submit
           </button>
