@@ -111,7 +111,7 @@ export function ProtestPage() {
               onClick={() => setShowAllGroups(!showAllGroups)}
               className="bg-white hover:bg-blue-600 text-black px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-md hover:shadow-lg"
             >
-              <Plus className="h-4 w-4" /> {/* Plus icon */}
+              <Plus className="h-4 w-4 hover:text-white text-black" /> {/* Plus icon */}
             </button>
             <button
               onClick={() => setShowAllGroups(false)}
@@ -137,7 +137,7 @@ export function ProtestPage() {
                 {filteredOrgs.map((org) => (
                   <tr
                     key={org.id}
-                    className={`border-b border-gray-800 hover:bg-gray-800/50 transition-all transform hover:scale-105 ${
+                    className={` border-gray-800 hover:bg-gray-800/50 transition-all transform hover:scale-95 ${
                       joinedOrgs.includes(org.id) ? 'bg-gray-700' : ''
                     }`}
                   >
@@ -149,7 +149,7 @@ export function ProtestPage() {
                         onClick={() => handleJoinToggle(org.id)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
                           joinedOrgs.includes(org.id)
-                            ? 'bg-yellow-500 text-white font-bold'
+                            ? 'bg-yellow-400 text-white font-bold'
                             : 'bg-blue-500 hover:bg-blue-600 text-white'
                         }`}
                       >
