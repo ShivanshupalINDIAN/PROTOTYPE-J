@@ -14,7 +14,7 @@ export function LandingPage() {
   }, [navigate]);
 
   return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'rgb(228, 252, 252)' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'white' }}>
       <div className="flex items-center justify-center">
         <div className="text-center animate-fade-in">
           <img src={jatayu_logo} alt="Jatayu Logo" className="w-50 h-50 mx-auto mb-6" />

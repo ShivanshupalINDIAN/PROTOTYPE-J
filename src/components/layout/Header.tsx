@@ -13,7 +13,7 @@ export function Header() {
       <div className="max-w-7xl ml-0 mr-auto px-0 h-24">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center mx-10">
-            <div className="h-16 w-16 border-white  bg-white border-2  mr-2">
+            <div className="h-16 w-16 border-white rounded-md bg-white border-2  mr-2">
               <img src={jatayuLogo} alt="Jatayu Logo" className="h-full w-full object-cover" />
             </div>
             <span className={`text-3xl font-bold text-white  ml-2 mr-5 pl-0`}>
@@ -22,9 +22,9 @@ export function Header() {
           </div>
           <div className="flex items-center mx-30"></div>
 
-          <div className="hidden md:flex flex-1 max-w-xl mx-8">
+          <div className="hidden md:flex flex-1 max-w-xl mx-30">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white" />
               <input
                 type="search"
                 placeholder="Search"
@@ -49,14 +49,6 @@ export function Header() {
             
             <button className={`md:hidden p-3 ${colors.primary.hover} rounded-full text-white`}>
               <Menu className="h-7 w-7" />
-            </button>
-
-            <button className="w-10 h-10 rounded-full overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64"
-                alt="User avatar"
-                className="w-full h-full object-cover"
-              />
             </button>
           </div>
         </div>

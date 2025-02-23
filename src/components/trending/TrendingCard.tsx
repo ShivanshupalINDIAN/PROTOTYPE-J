@@ -8,7 +8,7 @@ interface TrendingCardProps {
 
 export function TrendingCard({ trend }: TrendingCardProps) {
   return (
-    <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors">
+    <div className="bg-black p-6 rounded-lg hover:bg-gray-700 transition-colors">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-xl font-bold mb-2 text-white">{trend.title}</h2>
