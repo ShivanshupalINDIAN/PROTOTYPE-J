@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Mail, Lock, Calendar } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterProps {
   onSubmit: (data: {
@@ -20,6 +21,14 @@ export function Register({ onSubmit }: RegisterProps) {
     password: '',
   });
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
+
+  const onRegister = () => {
+    
+    navigate('/verification');
+
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +55,7 @@ export function Register({ onSubmit }: RegisterProps) {
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your name"
+              name='Name'
             />
           </div>
         </div>
@@ -58,6 +68,7 @@ export function Register({ onSubmit }: RegisterProps) {
             value={formData.gender}
             onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+            name='Gender'
           >
             <option value="">Select gender</option>
             <option value="male">Male</option>
@@ -77,6 +88,7 @@ export function Register({ onSubmit }: RegisterProps) {
               value={formData.dateOfBirth}
               onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+              name='Date of Birth'
             />
           </div>
         </div>
@@ -93,6 +105,7 @@ export function Register({ onSubmit }: RegisterProps) {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your email"
+              name='Email'
             />
           </div>
         </div>
@@ -109,6 +122,7 @@ export function Register({ onSubmit }: RegisterProps) {
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Create a password"
+              name='Password'
             />
           </div>
         </div>
@@ -118,6 +132,7 @@ export function Register({ onSubmit }: RegisterProps) {
         <button
           type="submit"
           className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          onClick={onRegister}
         >
           Continue to Verification
         </button>
