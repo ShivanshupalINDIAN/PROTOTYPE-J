@@ -7,17 +7,21 @@ interface LoginProps {
 }
 
 export function Login({ onLogin, onRegister }: LoginProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError('Both fields are required');
       return;
     }
-    onLogin(email, password);
+
+    setError('');
+    console.log(email, password);
   };
 
   return (
@@ -32,8 +36,7 @@ export function Login({ onLogin, onRegister }: LoginProps) {
             <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your email"
             />
@@ -48,8 +51,7 @@ export function Login({ onLogin, onRegister }: LoginProps) {
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your password"
             />
@@ -61,6 +63,7 @@ export function Login({ onLogin, onRegister }: LoginProps) {
         <button
           type="submit"
           className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          
         >
           Login
         </button>

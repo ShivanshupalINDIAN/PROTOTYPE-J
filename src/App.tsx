@@ -7,6 +7,9 @@ import { ProtestPage } from './pages/ProtestPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { TrendingPage } from './pages/TrendingPage';
 import { FilterPage } from './pages/FilterPage';
+import {Login} from './components/AuthFlow/Login';
+import { Register } from './components/AuthFlow/Register';
+import { AadhaarVerification } from './components/AuthFlow/AadhaarVerification';
 
 function App() {
   return (
@@ -14,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}/>
         <Route path="/home" element={<Layout />}>
+        
           <Route index element={<GovernancePage />} />
           <Route path="shorts" element={<ShortsPage />} />
           <Route path="protest" element={<ProtestPage />} />
@@ -21,6 +25,10 @@ function App() {
           <Route path="trending" element={<TrendingPage />} />
           <Route path="filter" element={<FilterPage />} />
         </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/verification' element={<AadhaarVerification/>}/>
+
       </Routes>
     </Router>
   );
