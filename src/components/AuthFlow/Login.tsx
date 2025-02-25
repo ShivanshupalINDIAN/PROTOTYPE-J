@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface LoginProps {
-  onLogin: (email: string, password: string) => void;
-  onRegister: () => void;
-}
 
-export function Login({ onLogin, onRegister }: LoginProps) {
+export function Login() {
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +23,7 @@ export function Login({ onLogin, onRegister }: LoginProps) {
   };
 
   return (
+    <div className="flex items-center justify-center">
     <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
       <h2 className="text-3xl font-bold text-center mb-8">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -72,13 +71,18 @@ export function Login({ onLogin, onRegister }: LoginProps) {
           Don't have an account?{' '}
           <button
             type="button"
-            onClick={onRegister}
+            onClick={()=>{
+              navigate('/register');
+            }}
             className="text-black font-semibold hover:underline"
+            
+        
           >
             Register
           </button>
         </p>
       </form>
+    </div>
     </div>
   );
 }

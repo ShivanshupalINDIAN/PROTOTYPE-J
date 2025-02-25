@@ -40,7 +40,8 @@ export function Register({ onSubmit }: RegisterProps) {
   };
 
   return (
-    <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
+    <div className="flex items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center max-w-md p-8 bg-white rounded-lg shadow-xl">
       <h2 className="text-3xl font-bold text-center mb-8">Create Account</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -137,6 +138,7 @@ export function Register({ onSubmit }: RegisterProps) {
           Continue to Verification
         </button>
       </form>
+    </div>
     </div>
   );
 }
