@@ -7,7 +7,7 @@ export function LandingPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/home');
+      navigate('/login');
     }, 6000);
 
     return () => clearTimeout(timer);
