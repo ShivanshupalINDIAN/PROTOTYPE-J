@@ -23,8 +23,8 @@ export function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-    <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
+    <div className="flex items-center justify-center h-screen">
+    <div className="w-full max-w-md p-12 bg-white rounded-lg shadow-xl">
       <h2 className="text-3xl font-bold text-center mb-8">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -36,7 +36,7 @@ export function Login() {
             <input
               type="email"
               name="email"
-              className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+              className="pl-8 w-80 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your email"
             />
           </div>
@@ -51,7 +51,7 @@ export function Login() {
             <input
               type="password"
               name="password"
-              className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+              className="pl-10 w-80 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your password"
             />
           </div>
@@ -61,7 +61,8 @@ export function Login() {
 
         <button
           type="submit"
-          className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          className="w-80 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          onClick={()=>navigate('/home')}
           
         >
           Login
