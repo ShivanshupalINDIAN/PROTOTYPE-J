@@ -48,8 +48,8 @@ export function AadhaarVerification({ onVerify }: AadhaarVerificationProps) {
   };
 
   return (
-    <div className="flex  justify-center">
-    <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
+    <div className="flex justify-center items-center min-h-screen">
+    <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl mt-10 min-h-[400px]">
       <h2 className="text-3xl font-bold text-center mb-8">Aadhaar Verification</h2>
       
       {!otpSent ? (

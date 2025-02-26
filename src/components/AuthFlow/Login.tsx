@@ -23,8 +23,8 @@ export function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-    <div className="w-full max-w-md p-12 bg-white rounded-lg shadow-xl">
+    <div className="flex items-center justify-center h-screen bg-white m-0">
+    <div className="w-full max-w-md p-12 bg-white shadow-xl border border-gray-150 h-41">
       <h2 className="text-3xl font-bold text-center mb-8">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>

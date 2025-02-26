@@ -40,15 +40,17 @@ export function Register({ onSubmit }: RegisterProps) {
   };
 
   return (
-    <div className="flex items-center justify-center">
-    <div className="w-full flex flex-col items-center justify-center max-w-md p-8 bg-white rounded-lg shadow-xl">
+    <div className="flex items-center justify-center mb-4 mt-40 ">
+    <div className="w-full flex flex-col items-center justify-center max-w-lg p-8 bg-white shadow-xl border border-gray-300 shadow-gray mt-10 h-290">
       <h2 className="text-3xl font-bold text-center mb-8">Create Account</h2>
+      <hr className="border-gray-300 w-full" />
+      <br />
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2 ml-0 text-left">
             Name
           </label>
-          <div className="relative">
+            <div className="relative flex justify-end">
             <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
@@ -57,8 +59,9 @@ export function Register({ onSubmit }: RegisterProps) {
               className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your name"
               name='Name'
+              style={{ width: '400px' }}
             />
-          </div>
+            </div>
         </div>
 
         <div>
@@ -130,13 +133,15 @@ export function Register({ onSubmit }: RegisterProps) {
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
-          onClick={onRegister}
-        >
-          Continue to Verification
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="w-1/2 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+            onClick={onRegister}
+          >
+            Continue to Verification
+          </button>
+        </div>
       </form>
     </div>
     </div>
