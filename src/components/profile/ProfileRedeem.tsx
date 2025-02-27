@@ -60,7 +60,7 @@ export function ProfileRedeem() {
                 <h3 className="font-semibold text-white">{reward.title}</h3>
               </div>
               <p className="text-white text-sm mb-4">{reward.description}</p>
-              <button className="w-full bg-white text-white py-2 rounded-lg hover:bg-gray-200 transition-colors">
+              <button className="w-full bg-white text-black py-2 rounded-lg hover:bg-gray-200 transition-colors">
                 Redeem for {reward.tokenCost} tokens
               </button>
             </div>

@@ -58,7 +58,7 @@ export function ProtestPage() {
     setPollOptions([...pollOptions, ""]);
   };
 
-  const updatePollOption = (index, value) => {
+  const updatePollOption = (index: number, value: string) => {
     const newOptions = [...pollOptions];
     newOptions[index] = value;
     setPollOptions(newOptions);
@@ -81,7 +81,8 @@ export function ProtestPage() {
     org.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const joinedOrganizations = YOUTH_ORGANIZATIONS.filter(org => joinedOrgs.includes(org.id));
+const joinedOrganizations = YOUTH_ORGANIZATIONS.filter(org => joinedOrgs && joinedOrgs.includes(org.id));
+
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -244,15 +245,15 @@ export function ProtestPage() {
     
     {/* Step Indicator (Removed Numbers) */}
     <div className="flex items-center justify-center mb-6">
-      {[1, 2, 3].map((num, index) => (
-      <div key={num} className="flex items-center mx-2">
-        <div className={`flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white' : 'text-black border-gray-400'} ${step === num ? 'w-12 h-12' : 'w-7 h-7'}`}>
+  {[1, 2, 3, 4].map((num, index) => (
+    <div key={num} className="flex items-center">
+      <div className={`w-8 h-8 flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white' : 'text-black border-gray-400'}`}>
         {num}
-        </div>
-        {index !== 2 && <div className="w-16 h-0.5 bg-black"></div>}
       </div>
-      ))}
+      {index !== 3 && <div className="w-16 h-1 bg-gray-400"></div>}
     </div>
+  ))}
+</div>
 
     {/* Step 1 Fields */}
     {step === 1 && (
@@ -341,55 +342,104 @@ export function ProtestPage() {
       </div>
     )}
 
-    {/* Step 3 Fields */}
-    {step === 3 && (
-      <div>
-        <label className="block text-lg font-semibold mb-2">Post</label>
-        <div className="border-2 border-dashed border-gray-400 p-12 rounded-xl mb-4 text-center bg-white text-gray-600 hover:bg-gray-50 transition-colors">
-          Live Video or Post Preview
-        </div>
-        
-        <label className="block text-lg font-semibold mb-2">Event Scheduling</label>
+
+{step === 3 && (
+  <div>
+    <label className="block text-lg font-semibold mb-2">Post</label>
+    <div className="border-2 border-dashed border-gray-400 p-12 rounded-xl mb-4 text-center bg-white text-gray-600 hover:bg-gray-50 transition-colors">
+      Live Video or Post Preview
+    </div>
+    
+    <label className="block text-lg font-semibold mb-2">Event Scheduling</label>
+    <input
+      type="date"
+      className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+    
+    <label className="block text-lg font-bold mb-2">Poll</label>
+    <input
+      type="text"
+      placeholder="Enter your statement"
+      className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+    {pollOptions.map((option, index) => (
+      <div key={index} className="flex items-center mb-2">
+        <span
+          className="w-4 h-4 rounded-full mr-2"
+          style={{ backgroundColor: ['#FF6B6B', '#6BCB77', '#4D96FF', '#FFB74D', '#A66DD4'][index % 5] }}
+        ></span>
         <input
-          type="date"
-          className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-black"
+          type="text"
+          value={option}
+          onChange={(e) => updatePollOption(index, e.target.value)}
+          placeholder={`Option ${index + 1}`}
+          className="w-[60%] h-10 bg-white border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        
-        <label className="block text-lg font-semibold mb-2">Poll</label>
-        {pollOptions.map((option, index) => (
-          <input
-            key={index}
-            type="text"
-            value={option}
-            onChange={(e) => updatePollOption(index, e.target.value)}
-            placeholder={`Option ${index + 1}`}
-            className="w-full p-3 bg-white border border-gray-300 rounded-lg font-medium mb-2 focus:outline-none focus:ring-2 focus:ring-black"
-          />
-        ))}
-        <button
-          onClick={addPollOption}
-          className="text-black underline font-semibold hover:text-black"
-        >
-          + Add Option
-        </button>
-        
-        <div className="flex justify-between mt-6">
-            <button
-            onClick={() => setStep(2)}
-            className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-black hover:text-white font-semibold transition-colors"
-            >
-            Back
-            </button>
-          <button
-            className="bg-black text-white px-6 py-2 rounded-lg hover:bg-black font-semibold transition-colors"
-          >
-            Submit
-          </button>
-        </div>
       </div>
-    )}
-  </Dialog.Panel>
-</Dialog>
+    ))}
+    <button
+      onClick={addPollOption}
+      className="text-blue-600 underline font-semibold hover:text-blue-700"
+    >
+      + Add Option
+    </button>
+    
+    <div className="flex justify-between mt-6">
+      <button
+        onClick={() => setStep(2)}
+        className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-200 font-semibold transition-colors"
+      >
+        Back
+      </button>
+      <button
+        onClick={() => setStep(4)}
+        className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-900 font-semibold transition-colors"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+)}
+{step === 4 && (
+            <div>
+              <label className="block text-lg font-semibold mb-2">Pay to Raise Voice</label>
+              <div className="border-2 border-dashed border-gray-400 p-8 rounded-xl text-center bg-white text-gray-600 hover:bg-gray-50 transition-colors">
+                <p className="text-lg font-semibold">You need to pay <span className="text-black font-bold">45 coins</span> to raise your voice.</p>
+                <p className="text-sm text-gray-500 mt-2">Don't have enough coins? Buy them now!</p>
+                <button
+                  onClick={() => {
+                    const coinAnimation = document.createElement('div');
+                    coinAnimation.className = 'coin-animation';
+                    document.body.appendChild(coinAnimation);
+                    setTimeout(() => coinAnimation.remove(), 1000);
+                  }}
+                  className="mt-4 bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-900 font-semibold transition-colors"
+                >
+                  Pay 45 Coins
+                </button>
+              </div>
+              
+              <div className="flex justify-between mt-6">
+                <button
+                  onClick={() => setStep(3)}
+                  className="border border-gray-400 px-6 py-2 rounded-lg hover:bg-gray-200 font-semibold transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-900 font-semibold transition-colors"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          )}
+        </Dialog.Panel>
+      </Dialog>
     </div>
   );
 }
+
