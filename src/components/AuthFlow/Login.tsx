@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-interface LoginProps {
-  onLogin: (email: string, password: string) => void;
-  onRegister: () => void;
-}
 
-export function Login({ onLogin, onRegister }: LoginProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export function Login() {
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError('Both fields are required');
       return;
     }
-    onLogin(email, password);
+
+    setError('');
+    console.log(email, password);
   };
 
   return (
-    <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
+    <div className="flex items-center justify-center h-screen bg-white m-0">
+    <div className="w-full max-w-md p-12 bg-white shadow-xl border border-gray-150 h-41">
       <h2 className="text-3xl font-bold text-center mb-8">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -32,9 +35,8 @@ export function Login({ onLogin, onRegister }: LoginProps) {
             <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+              name="email"
+              className="pl-8 w-80 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your email"
             />
           </div>
@@ -48,9 +50,8 @@ export function Login({ onLogin, onRegister }: LoginProps) {
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="pl-10 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+              name="password"
+              className="pl-10 w-80 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
               placeholder="Enter your password"
             />
           </div>
@@ -60,7 +61,9 @@ export function Login({ onLogin, onRegister }: LoginProps) {
 
         <button
           type="submit"
-          className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          className="w-80 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          onClick={()=>navigate('/home')}
+          
         >
           Login
         </button>
@@ -69,13 +72,18 @@ export function Login({ onLogin, onRegister }: LoginProps) {
           Don't have an account?{' '}
           <button
             type="button"
-            onClick={onRegister}
+            onClick={()=>{
+              navigate('/register');
+            }}
             className="text-black font-semibold hover:underline"
+            
+        
           >
             Register
           </button>
         </p>
       </form>
+    </div>
     </div>
   );
 }
