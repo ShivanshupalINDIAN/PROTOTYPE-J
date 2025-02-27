@@ -104,24 +104,34 @@ const joinedOrganizations = YOUTH_ORGANIZATIONS.filter(org => joinedOrgs && join
       <div className="bg-gray-900 rounded-lg p-6 mb-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <User className="h-5 w-5 text-white" /> {/* Human icon */}
+            <User className="h-5 w-5 text-white" />
             <h2 className="text-xl font-semibold text-white">Youth Activist Groups</h2>
           </div>
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setShowAllGroups(!showAllGroups)}
-              className="bg-white hover:bg-blue-600 text-black px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-md hover:shadow-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowAllGroups((prev) => (prev === true ? null : true));
+              }}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-md hover:shadow-lg"
             >
-              <Plus className="h-4 w-4 hover:text-white text-black" /> {/* Plus icon */}
+              <Plus className="h-4 w-4" />
+              Add Group
             </button>
             <button
-              onClick={() => setShowAllGroups(false)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowAllGroups((prev) => (prev === false ? null : false));
+              }}
               className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors shadow-md hover:shadow-lg"
             >
               Show Joined Organizations
             </button>
           </div>
         </div>
+
+
+
 
         {showAllGroups ? (
           <div className="overflow-x-auto">
@@ -247,10 +257,10 @@ const joinedOrganizations = YOUTH_ORGANIZATIONS.filter(org => joinedOrgs && join
     <div className="flex items-center justify-center mb-6">
   {[1, 2, 3, 4].map((num, index) => (
     <div key={num} className="flex items-center">
-      <div className={`w-8 h-8 flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white' : 'text-black border-gray-400'}`}>
-        {num}
+      <div className={`flex items-center justify-center rounded-full border-2 font-bold ${step >= num ? 'bg-black text-white w-12 h-12' : 'text-black border-gray-400 w-8 h-8'}`}>
+      {num}
       </div>
-      {index !== 3 && <div className="w-16 h-1 bg-gray-400"></div>}
+      {index !== 3 && <div className="w-16 h-0.5 bg-gray-400"></div>}
     </div>
   ))}
 </div>
@@ -402,9 +412,9 @@ const joinedOrganizations = YOUTH_ORGANIZATIONS.filter(org => joinedOrgs && join
 )}
 {step === 4 && (
             <div>
-              <label className="block text-lg font-semibold mb-2">Pay to Raise Voice</label>
+              <label className="block text-lg font-semibold mb-2">Pay to Organize Voice</label>
               <div className="border-2 border-dashed border-gray-400 p-8 rounded-xl text-center bg-white text-gray-600 hover:bg-gray-50 transition-colors">
-                <p className="text-lg font-semibold">You need to pay <span className="text-black font-bold">45 coins</span> to raise your voice.</p>
+                <p className="text-lg font-semibold">You need to pay <span className="text-black font-bold">1500 coins</span> to raise your voice.</p>
                 <p className="text-sm text-gray-500 mt-2">Don't have enough coins? Buy them now!</p>
                 <button
                   onClick={() => {
@@ -415,7 +425,7 @@ const joinedOrganizations = YOUTH_ORGANIZATIONS.filter(org => joinedOrgs && join
                   }}
                   className="mt-4 bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-900 font-semibold transition-colors"
                 >
-                  Pay 45 Coins
+                  Pay 1500 Coins
                 </button>
               </div>
               
